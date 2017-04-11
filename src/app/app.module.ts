@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {AuthService} from "../service/service.auth";
 import {RestService} from "../service/service.rest";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

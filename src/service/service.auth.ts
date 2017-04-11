@@ -27,10 +27,10 @@ export class AuthService {
     let dataObj1 = JSON.stringify(dataObj)
 
     /* Stores email address and other details(if required)into Local Storage for multiple access across components */
-    this._restService.post('https://reqres.in//api/login', dataObj1).subscribe(
+    this._restService.post('https://reqres.in/api/login', dataObj1).subscribe(
       (result) =>{
         console.log('awesome',result)
-        if (!result.token) {
+        if (result.token) {
           this.route.navigate(["/dashboard"])
         }
         // else{
