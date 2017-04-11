@@ -33,9 +33,9 @@ export class AuthService {
         if (!result.token) {
           this.route.navigate(["/dashboard"])
         }
-        else{
-          this.route.navigate([''])
-        }
+        // else{
+        //   this.route.navigate([''])
+        // }
         // this.data = result;
         // this.auth_token = this.data.key;
         // localStorage.setItem('key',  this.auth_token );
@@ -64,7 +64,7 @@ export class AuthService {
         // console.log("aerer",err)
         // console.log("=================", err.status)
         // EmitterService.get("signUpResponse").emit(err);
-        alert(err)
+
       })
   }
 

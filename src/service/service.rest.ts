@@ -190,9 +190,10 @@ export class RestService {
 
   private handleErrorObservable (error: any) {
     console.log(error.status,'==========>')
-    if(error.status==404){
+    if(error.status==400){
           localStorage.clear();
         console.log("hello")
+      alert("s")
 
 
       // Clear the Authorization key from request headers
@@ -207,9 +208,10 @@ export class RestService {
       return
 
     }
-    if(error.status==400) {
+    if(error.status==404) {
       localStorage.clear();
       console.log("hello")
+      alert("404 is working")
     }
     // In a real world app, we might send the error to remote logging infrastructure
     let errMsg = JSON.parse(error._body)|| '500';
