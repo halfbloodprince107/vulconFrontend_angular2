@@ -31,7 +31,10 @@ export class AuthService {
       (result) =>{
         console.log('awesome',result)
         if (result.token) {
+          console.log('------------>')
           this.route.navigate(["/dashboard"])
+          localStorage.setItem('key',JSON.stringify(result.token))
+          this.setCookie('token',result.token,2)
         }
         // else{
         //   this.route.navigate([''])
@@ -89,21 +92,24 @@ export class AuthService {
    // );
 
     // Clear the Authorization key from request headers
-    contentHeaders.delete('Authorization');
-
+    // contentHeaders.delete('Authorization');
+    localStorage.clear();
     // Clear the cookies
-    this.setCookie(name, "", -1);
+    // this.setCookie('token', '', -1);
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++)
+      this.setCookie(cookies[i].split("=")[0],'',-1,'/');
 
-    // Delete the X-CSRFToken key from request headers
-    contentHeaders.delete('X-CSRFToken');
-    this.user_details={}
+
+
+
     this._router.navigate(['/']);
 
   }
-  getUser(){
-    console.log("user")
-    return JSON.parse(localStorage.getItem('loggedInUser'))
-  }
+  // getUser(){
+  //   console.log("user")
+  //   return JSON.parse(localStorage.getItem('loggedInUser'))
+  // }
 
 
 

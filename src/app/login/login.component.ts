@@ -13,6 +13,9 @@ export class LoginComponent implements OnInit {
   constructor(private  authservice:AuthService) { }
 
   ngOnInit() {
+
+
+
   }
   loginUser(){
 
@@ -21,6 +24,10 @@ export class LoginComponent implements OnInit {
       _password:this.password
     }
     this.authservice.login(obj)
+
+    localStorage.setItem('currentUser', JSON.stringify({ username: this.username, }));
   }
+
+
 
 }

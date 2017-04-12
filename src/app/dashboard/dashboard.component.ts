@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  public user_name:any = "";
   constructor() { }
 
   ngOnInit() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.user_name = currentUser.username; // your token
+    console.log(this.user_name, "=====0000000000000000")
   }
 
 }
