@@ -7,13 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  public user_name:any = "";
+
+  public uId:any = "";
+  public fName:any = "";
+  public lName:any = "";
+  public email:any = "";
   constructor() { }
 
   ngOnInit() {
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.user_name = currentUser.username; // your token
-    console.log(this.user_name, "=====0000000000000000")
+
+    var userData = JSON.parse(localStorage.getItem('userData'));
+    this.uId = userData.id;
+    this.fName = userData.first_name;
+    this.lName = userData.last_name;
+    this.email = userData.avatar;
+
+
+
+
   }
 
 }

@@ -22,10 +22,8 @@ import { MainComponent } from './main/main.component';
     FormsModule,
     HttpModule,
     routing
-
   ],
   providers: [AuthService,RestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-

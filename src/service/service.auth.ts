@@ -7,7 +7,7 @@ import {contentHeaders} from "../app/common/headers";
 
 
 /*
- * Service for socail authentication, using ng2-ui-auth
+ * Service for social authentication, using ng2-ui-auth
  */
 @Injectable()
 export class AuthService {
@@ -29,44 +29,16 @@ export class AuthService {
     /* Stores email address and other details(if required)into Local Storage for multiple access across components */
     this._restService.post('https://reqres.in/api/login', dataObj1).subscribe(
       (result) =>{
-        console.log('awesome',result)
         if (result.token) {
-          console.log('------------>')
-          this.route.navigate(["/dashboard"])
           localStorage.setItem('key',JSON.stringify(result.token))
           this.setCookie('token',result.token,2)
+          this._restService.get("https://reqres.in/api/users/2").subscribe(res=> {
+            localStorage.setItem('userData', JSON.stringify(res.data))
+            this.route.navigate(["/dashboard"])
+          })
         }
-        // else{
-        //   this.route.navigate([''])
-        // }
-        // this.data = result;
-        // this.auth_token = this.data.key;
-        // localStorage.setItem('key',  this.auth_token );
-        // let csrf =this._restService.getCookie("csrftoken")
-        //
-        // /* Get user detail for current logged in session by token returned from the above service */
-        // this._restService.get( '').subscribe(
-        //   (result) =>{
-        //     console.log("result",result)
-        //     // //Saved user object inside localStorage for access across other components
-        //     // localStorage.setItem('loggedInUser',JSON.stringify(this.user_details));
-        //     //  EmitterService.get("loggedInUser").emit(result);
-        //     // // EmitterService.get("isUserLoggedIn").emit(true);
-        //     //     console.log("aerer",result)
-        //     //  EmitterService.get("isSuperuser").emit(this.user_details['is_superuser'])
-        //     //
-        //     //   if(this.user_details['is_superuser']) {
-        //     //     this.route.navigate(["/Home"])
-        //     //   }
-        //     //   else{
-        //     //     console.log('dashboard')
-        //     //     this.route.navigate(["/dashboard"])
-        //     //   }
-        //   });
+
       }, (err)=>{
-        // console.log("aerer",err)
-        // console.log("=================", err.status)
-        // EmitterService.get("signUpResponse").emit(err);
 
       })
   }
@@ -82,34 +54,16 @@ export class AuthService {
   }
 
   logout(){
-    // Removes logged in user details from Local Resources
-    //
-    // this._restService.get('').subscribe(
-    //   result=>{
-    //     localStorage.clear();
-    //
-    // }
-   // );
 
-    // Clear the Authorization key from request headers
-    // contentHeaders.delete('Authorization');
     localStorage.clear();
     // Clear the cookies
-    // this.setCookie('token', '', -1);
     var cookies = document.cookie.split(";");
     for (var i = 0; i < cookies.length; i++)
       this.setCookie(cookies[i].split("=")[0],'',-1,'/');
 
-
-
-
     this._router.navigate(['/']);
 
   }
-  // getUser(){
-  //   console.log("user")
-  //   return JSON.parse(localStorage.getItem('loggedInUser'))
-  // }
 
 
 
